@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Todo App</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    background:#111;
+    color:#fff;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+}
+
+.img{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+.container{
+    position:relative;
+    z-index:1;
+    width:450px;
+    background:rgba(20,20,20,.82);
+    backdrop-filter:blur(12px);
+    padding:25px;
+    border-radius:16px;
+    border:1px solid #444;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+#todo{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+input{
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #555;
+    background:#222;
+    color:#fff;
+}
+
+button{
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+#add{
+    background:#5865F2;
+    color:#fff;
+}
+
+.todo-item{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    background:#2a2a2a;
+    padding:10px;
+    border-radius:8px;
+    margin-top:8px;
+}
+
+.todo-item p{
+    flex:1;
+}
+
+.delete{
+    background:#d63031;
+    color:#fff;
+}
+
+.edit{
+    background:#00b894;
+    color:#fff;
+}
+
+.save{
+    background:#0984e3;
+    color:#fff;
+}
+
+.edit-input{
+    flex:1;
+    background:#111;
+    color:#fff;
+    padding:8px;
+    border:1px solid #666;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<img class="img" src="to-do-list-background-vector-14042784.avif" alt="Background">
+
+<div class="container">
+    <h1>📝 Todo App</h1>
+    <div id="todo"></div>
+</div>
+
+<script>
+(() => {
+
+const todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+const save = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+};
+
+const container = document.getElementById("todo");
+
+const input = document.createElement("input");
+input.placeholder = "Enter task";
+
+const addBtn = document.createElement("button");
+addBtn.id = "add";
+addBtn.textContent = "Add Task";
+
+const list = document.createElement("div");
+
+container.append(input, addBtn, list);
+
+function render(task){
+
+    const item = document.createElement("div");
+    item.className = "todo-item";
+
+    const text = document.createElement("p");
+    text.textContent = task;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete";
+    deleteBtn.textContent = "Delete";
+
+    const editBtn = document.createElement("button");
+    editBtn.className = "edit";
+    editBtn.textContent = "Edit";
+
+    deleteBtn.onclick = () => {
+        const index = todos.indexOf(task);
+
+        if(index > -1){
+            todos.splice(index,1);
+            save();
+        }
+
+        item.remove();
+    };
+
+    editBtn.onclick = () => {
+
+        editBtn.disabled = true;
+
+        const editInput = document.createElement("input");
+        editInput.className = "edit-input";
+        editInput.value = text.textContent;
+
+        const saveBtn = document.createElement("button");
+        saveBtn.className = "save";
+        saveBtn.textContent = "Save";
+
+        item.insertBefore(editInput, text);
+        item.insertBefore(saveBtn, deleteBtn);
+
+        text.style.display = "none";
+
+        saveBtn.onclick = () => {
+
+            const value = editInput.value.trim();
+
+            if(!value) return;
+
+            const index = todos.indexOf(task);
+
+            if(index > -1){
+                todos[index] = value;
+                task = value;
+                save();
+            }
+
+            text.textContent = value;
+            text.style.display = "block";
+
+            editInput.remove();
+            saveBtn.remove();
+
+            editBtn.disabled = false;
+        };
+    };
+
+    item.append(text, deleteBtn, editBtn);
+
+    list.prepend(item);
+}
+
+todos.slice().reverse().forEach(render);
+
+function addTodo(){
+
+    const task = input.value.trim();
+
+    if(!task) return;
+
+    todos.unshift(task);
+
+    save();
+
+    render(task);
+
+    input.value = "";
+}
+
+addBtn.onclick = addTodo;
+
+input.addEventListener("keydown", e => {
+    if(e.key === "Enter"){
+        addTodo();
+    }
+});
+
+})();
+</script>
+
+</body>
+</html>
