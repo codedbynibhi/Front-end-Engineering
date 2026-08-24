@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:30px;
+    font-family:Georgia, serif;
+
+    background:
+    radial-gradient(circle, rgba(0,0,0,0.15) 2px, transparent 2px),
+    linear-gradient(135deg,#ffe259,#ffa751);
+
+    background-size:25px 25px,100% 100%;
+}
+
+        .meme{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            max-width:900px;
+            width:100%;
+            gap:20px;
+        }
+
+        .text{
+            width:100%;
+            font-size:30px;
+            line-height:1.5;
+            text-align:left;
+        }
+
+        .img{
+            width:100%;
+            border-radius:15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="meme">
+
+        <div class="text">
+            <p><b>Teacher:</b> You have 5 minutes to copy everything from the whiteboard.</p>
+            <br>
+            <p><b>21st Century Students:</b></p>
+        </div>
+
+        <img class="img" src="meme.jpeg" alt="Meme">
+
+    </div>
+
+</body>
+</html>
