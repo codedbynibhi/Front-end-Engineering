@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parallax website</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+}
+.image1{
+    height:100vh;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+.image2{
+    height:100vh;
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.image1{
+    background-image:url("American_Eskimo_Dog.jpg");
+}
+
+.image2{
+    background-image:url("https://images.pexels.com/photos/56866/garden-rose-red-pink-56866.jpeg");
+}
+
+
+.title{
+    color:white;
+    font-size:50px;
+    font-weight:bold;
+    background:rgba(0,0,0,0.5);
+    padding:20px 40px;
+    border-radius:10px;
+}
+
+
+
+.content{
+    background:white;
+    padding:70px;
+    text-align:center;
+}
+
+.content h2{
+    margin-bottom:20px;
+    font-size:35px;
+}
+
+.content p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    font-size:18px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="image1"></div>
+
+<div class="content">
+    <h2>Dogs</h2>
+    <p>
+        Dogs are known as humans' best friends. They are loyal,
+        playful, and always happy to see you. Keep scrolling to
+        see another beautiful background.
+    </p>
+</div>
+
+<div class="image2"></div>
+
+<div class="content">
+    <h2>Nature</h2>
+    <p>
+        Flowers add beauty and color to the world. This page uses
+        the CSS property <b>background-attachment: fixed;</b> to
+        create a simple parallax scrolling effect.
+    </p>
+</div>
+
+</body>
+</html>

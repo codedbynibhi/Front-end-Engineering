@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+    <style>
+        body{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+           
+        }
+        button{
+            background-color:blue;
+            color:white;
+            border:none;
+            padding:20px 40px;
+            font-size:24px;
+            border-radius:10px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background-color:pink;
+        }
+    </style>
+</head>
+<body>
+
+<button id="counter" onclick="increase()">0</button>
+
+<script>
+let count = 0;
+
+function increase() {
+    count++;
+    document.getElementById("counter").innerText = count;
+}
+</script>
+
+</body>
+</html></html>
